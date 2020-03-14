@@ -20,7 +20,7 @@ La comunicación desde la PC a los dispositivos se hace a traves de puertos seri
 
 ## Ejemplo ⚙️
 
-Puede ver un ejemplo en el wiki.
+Puede ver un ejemplo en el [wiki](https://github.com/debstudio/SerialBroadcast/wiki).
 
 ## Autores ✒️
 
