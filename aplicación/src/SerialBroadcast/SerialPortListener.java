@@ -85,6 +85,8 @@ public class SerialPortListener implements SerialPortDataListenerWithExceptions
                  System.out.println(inputLine);*/
              } catch (IOException ex) {
                  Logger.getLogger(SerialPortListener.class.getName()).log(Level.SEVERE, null, ex);
+                SystemTrayWebSocket.trayIcon.displayMessage("Serial Broadcast", "Error "+serial.getSystemPortName()+": " + ex.getMessage(), TrayIcon.MessageType.ERROR);
+                ManejadorSerie.removePuertosAbiertos(serial);
              }
  
          }

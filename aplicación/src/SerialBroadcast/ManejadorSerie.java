@@ -38,13 +38,14 @@ public class ManejadorSerie {
     public synchronized static void conectar( String portName, int baudrate)
     {
             boolean encontrado=false;
-                for(SerialPort sp:puertosAbiertos)
+                 ArrayList<SerialPort> auxpuertosAbiertos=(ArrayList<SerialPort>) puertosAbiertos.clone();
+                for(SerialPort sp:auxpuertosAbiertos)
                 {
                     if(sp.getSystemPortName().compareTo(portName)==0) 
                         if(!sp.isOpen()){
 
                             
-                             puertosAbiertos.remove(sp);
+                              removePuertosAbiertos(sp);
                         }
                          else
                          {
@@ -61,12 +62,13 @@ public class ManejadorSerie {
                     if(commPort.isOpen())
                     {
                         try {
-                            puertosAbiertos.add(commPort);
+                            
                             commPort.addDataListener(new SerialPortListener(commPort));
                             Thread.sleep(2000);
-                            SystemTrayWebSocket.trayIcon.displayMessage("Broadcast Serie",
+                            SystemTrayWebSocket.trayIcon.displayMessage("Serial Broadcast",
                                     "PUERO SERIE " +portName+" CONECTADO",
                                     TrayIcon.MessageType.INFO);
+                            puertosAbiertos.add(commPort);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(ManejadorSerie.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -75,13 +77,13 @@ public class ManejadorSerie {
                     
                     else{
 
-                        SystemTrayWebSocket.trayIcon.displayMessage("Broadcast Serie", "NO SE PUDO ABRIR EL PUERTO "+portName,TrayIcon.MessageType.ERROR);
+                        SystemTrayWebSocket.trayIcon.displayMessage("Serial Broadcast", "NO SE PUDO ABRIR EL PUERTO "+portName,TrayIcon.MessageType.ERROR);
 
                     }
                 }
 
     }
-     public synchronized static void enviar( String mensaje )
+     public static void enviar( String mensaje )
     {
             byte[] decodedBytes = Base64.getDecoder().decode(mensaje);    
                     System.out.println(decodedBytes);
@@ -90,7 +92,8 @@ public class ManejadorSerie {
                         sb.append(String.format("%02X ", b));
                     }
                     System.out.println(sb.toString());
-            for(SerialPort sp:puertosAbiertos)
+                    ArrayList<SerialPort> auxpuertosAbiertos=(ArrayList<SerialPort>) puertosAbiertos.clone();
+            for(SerialPort sp:auxpuertosAbiertos)
             {
                 try {
                     sp.getOutputStream().write(decodedBytes);
@@ -98,13 +101,13 @@ public class ManejadorSerie {
                     sp.getOutputStream().write('\r');
                 } catch (IOException ex) {
                     Logger.getLogger(ManejadorSerie.class.getName()).log(Level.SEVERE, null, ex);
-                    SystemTrayWebSocket.trayIcon.displayMessage("Broadcast Serie", "Error"+" "+sp.getSystemPortName()+": " + ex.getMessage(), TrayIcon.MessageType.ERROR);
+                    SystemTrayWebSocket.trayIcon.displayMessage("Serial Broadcast", "Error"+" "+sp.getSystemPortName()+": " + ex.getMessage(), TrayIcon.MessageType.ERROR);
                     puertosAbiertos.remove(sp);
                 }
           
             }
     }
-    public synchronized static void recibir( byte[] mensaje)
+    public static void recibir( byte[] mensaje)
     {
         
         String sMensaje=Base64.getEncoder().encodeToString(mensaje);
@@ -122,34 +125,44 @@ public class ManejadorSerie {
     }
     public synchronized static void removePuertosAbiertos(SerialPort sp)
     {
-         puertosAbiertos.remove(sp);
+         for (SerialPort auxSp:puertosAbiertos)
+         {    
+             if (auxSp.getSystemPortName().compareTo(sp.getSystemPortName())==0)
+             {
                     if(sp.isOpen())
                     {
+                        sp.removeDataListener();
                         sp.closePort();
                         
+                        
                     }
+                    puertosAbiertos.remove(auxSp);
+                    return;
+             }
+         }
     }
     public static void compruebaPuertos()
     {
         ArrayList<SerialPort> auxpuertosAbiertos=(ArrayList<SerialPort>) puertosAbiertos.clone();
+        System.out.println(auxpuertosAbiertos);
          for(SerialPort sp:auxpuertosAbiertos)
             {
                if(!sp.isOpen()){
             
-                    SystemTrayWebSocket.trayIcon.displayMessage("Broadcast Serie", "DESCONECTADO "+sp.getSystemPortName(),TrayIcon.MessageType.ERROR);
+                    SystemTrayWebSocket.trayIcon.displayMessage("Serial Broadcast", "DESCONECTADO "+sp.getSystemPortName(),TrayIcon.MessageType.ERROR);
 
                     removePuertosAbiertos(sp);
                 }
             }
          
     }
-    public synchronized static void removeTodosPuertosAbiertos()
+    public static void removeTodosPuertosAbiertos()
     {
          ArrayList<SerialPort> auxpuertosAbiertos=(ArrayList<SerialPort>) puertosAbiertos.clone();
          for(SerialPort sp:auxpuertosAbiertos)
             {
                 removePuertosAbiertos(sp);
-                SystemTrayWebSocket.trayIcon.displayMessage("Broadcast Serie", "DESCONECTADO "+sp.getSystemPortName(),TrayIcon.MessageType.INFO);
+                SystemTrayWebSocket.trayIcon.displayMessage("Serial Broadcast", "DESCONECTADO "+sp.getSystemPortName(),TrayIcon.MessageType.INFO);
             }
          
     }
