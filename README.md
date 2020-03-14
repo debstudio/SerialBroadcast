@@ -18,7 +18,7 @@ La comunicación desde la PC a los dispositivos se hace a traves de puertos seri
   - [Sprite Serial Broadcast](https://github.com/debstudio/SerialBroadcast/blob/master/extensiones/sprite_serial_broadcast.mext?raw=true)
 
 
-## Ejecutando las pruebas ⚙️
+## Ejemplo ⚙️
 
 Puede ver un ejemplo en el wiki.
 
