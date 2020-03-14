@@ -1,8 +1,8 @@
 # Serial Software
 
-Es una copia de las extensiones de mBlock "Arduino Broadcast" y "Sprite Broadcast" modificadas para que permita la comunicación bluetooth con multiples dispositivos mediante una aplicación externa.
+Es una copia de las extensiones de mBlock "Arduino Broadcast" y "Sprite Broadcast" modificadas para que permita la comunicación bluetooth con múltiples dispositivos mediante una aplicación externa.
 
-La comunicación desde la PC a los dispositivos se hace a traves de puertos series asociados a los dispositivos bluetooth.
+La comunicación desde la PC a los dispositivos se hace a través de puertos series asociados a los dispositivos bluetooth.
 
 ### Pre-requisitos 📋
 
@@ -13,7 +13,7 @@ La comunicación desde la PC a los dispositivos se hace a traves de puertos seri
 ### Instalación 🔧
 
 - Descargue e instale la aplicación [Serial Broadcast](https://github.com/debstudio/SerialBroadcast/raw/master/aplicaci%C3%B3n/SerialBroadcastInstall.zip)
-- En mBlock descargue la extención "Serial Broadcast" para su dispositivo y sprite. Puede descargarla desde los siguientes enlaces y arrastrarlas sobre el IDE.
+- En mBlock descargue la extensión "Serial Broadcast" para su dispositivo y sprite. Puede descargarla desde los siguientes enlaces y arrastrarlas sobre el IDE.
   - [Arduino Serial Broadcast](https://github.com/debstudio/SerialBroadcast/blob/master/extensiones/arduino_serial_broadcast.mext?raw=true)
   - [Sprite Serial Broadcast](https://github.com/debstudio/SerialBroadcast/blob/master/extensiones/sprite_serial_broadcast.mext?raw=true)
 
