@@ -1,4 +1,4 @@
-# Serial Software
+# Serial Broadcast
 
 Es una copia de las extensiones de mBlock "Arduino Broadcast" y "Sprite Broadcast" modificadas para que permita la comunicación bluetooth con múltiples dispositivos mediante una aplicación externa.
 
