@@ -28,5 +28,5 @@ debStudio S.A. [http://www.debstudio.com.ar](http://www.debstudio.com.ar)
 
 ## Licencia 📄
 
-GNU GPL Versión 3 [LICENSE.md](LICENSE) para detalles
+GNU GPL Versión 3 [LICENSE](LICENSE) para detalles
 
