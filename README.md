@@ -24,7 +24,8 @@ Puede ver un ejemplo en el [wiki](https://github.com/debstudio/SerialBroadcast/w
 
 ## Autores ✒️
 
-debStudio S.A. [http://www.debstudio.com.ar](http://www.debstudio.com.ar)
+debStudio S.A. [http://www.debstudio.com.ar](http://www.debstudio.com.ar) robotica@debstudio.com.ar
+
 
 ## Licencia 📄
 
